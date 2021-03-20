@@ -17,8 +17,8 @@ def load():
   print("request!!", request)
   output = {}
   if request.method ==  'POST':
-    print('request', request)
-    return request
+    print('request')
+    return json.dumps({'status': "200", 'data': request.form})
 #     if 'img_file' not in request.files:
 #       output['status'] = "400"
 #       output['error'] = 'img_file not in request'
