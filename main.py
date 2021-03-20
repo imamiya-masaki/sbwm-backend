@@ -16,8 +16,9 @@ def route():
 def load():
   print("request!!", request)
   output = {}
-#   if request.method ==  'POST':
-#     print('request', request)
+  if request.method ==  'POST':
+    print('request', request)
+    return request
 #     if 'img_file' not in request.files:
 #       output['status'] = "400"
 #       output['error'] = 'img_file not in request'
@@ -33,5 +34,4 @@ def load():
 #       output['data'] = simpleOCR(img)
 #       #print('args', request, img)
 #     return  json.dumps({'status': "200", 'data': simpleOCR(img)})
-  return "return World" 
    
