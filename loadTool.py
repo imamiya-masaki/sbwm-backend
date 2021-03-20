@@ -68,5 +68,3 @@ def postOCR(getImages = []):
     json_data = json.dumps(obj).encode("utf-8")
     request = requests.post(url, data=json_data, headers=headers)
     return request
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
