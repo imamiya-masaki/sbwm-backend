@@ -14,22 +14,23 @@ def route():
 
 @app.route('/load', methods=["GET", "POST"])
 def load():
+  print("request!!", request)
   output = {}
-  if request.method ==  'POST':
-    print('request', request)
-    if 'img_file' not in request.files:
-      output['status'] = "400"
-      output['error'] = 'img_file not in request'
-#       elif not allowed_file(request.form['img_file']):
-#         output['status'] = 400
-#           output['error'] = 'can use extension type'
-    else:
-      #success
-      #img_file = request.form['img_file']
-      #filename = secure_filename(img_file.filename)
-      img = request.files['img_file']
-      output['status'] = "200"
-      output['data'] = simpleOCR(img)
-      #print('args', request, img)
-    return  json.dumps({'status': "200", 'data': simpleOCR(img)})
+#   if request.method ==  'POST':
+#     print('request', request)
+#     if 'img_file' not in request.files:
+#       output['status'] = "400"
+#       output['error'] = 'img_file not in request'
+# #       elif not allowed_file(request.form['img_file']):
+# #         output['status'] = 400
+# #           output['error'] = 'can use extension type'
+#     else:
+#       #success
+#       #img_file = request.form['img_file']
+#       #filename = secure_filename(img_file.filename)
+#       img = request.files['img_file']
+#       output['status'] = "200"
+#       output['data'] = simpleOCR(img)
+#       #print('args', request, img)
+#     return  json.dumps({'status': "200", 'data': simpleOCR(img)})
    
