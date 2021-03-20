@@ -21,5 +21,6 @@ def load():
             #success
             img_file = request.files['img_file']
             filename = secure_filename(img_file.filename)
-            print('args', request)
+            print('args', request, img_file)
+            return simpleOCR(img_file)
 
