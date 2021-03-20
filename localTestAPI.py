@@ -12,7 +12,7 @@ fileName = 'IMG_2747.png'
 with open(fileDir+ fileName, "rb") as f:
     json_data = {}
     bynary = base64.b64encode(f.read()).decode('utf-8')
-    json_data['img_file'] = 'https://res.cloudinary.com/dagcggcea/image/upload/v1616267892/blue_output_sgdmec.png'
+    json_data['img_file'] = 'https://res.cloudinary.com/dagcggcea/image/upload/v1616280128/image_test_wlltdw.png'
     json_data['aa'] = '123'
     headers = {}
     headers["Content-Type"] = "application/json"

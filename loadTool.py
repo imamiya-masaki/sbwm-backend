@@ -4,6 +4,7 @@ import os
 import requests
 import base64
 import cloudinary as Cloud
+from cutOut import *
 Cloud.config.update = ({
 	'cloud_name':os.environ.get('CLOUDINARY_CLOUD_NAME'),
   'api_key': os.environ.get('CLOUDINARY_API_KEY'),
@@ -18,8 +19,37 @@ def allowed_file(file):
         filename.rsplit(".", 1)[1] in ALLOWED_EXTENSIONS
 
 def helloWorld():
-    return "Hello Wrold2"
+  return "Hello Wrold2"
 
+def simple2OCR(url):
+	response = requests.get(url)
+	file = response.content
+	res = imageRe(file)
+	output = {'red': {}, 'blue': {}, 'green': {}, 'Black': {}}
+	for key in res:
+		print('kmdkwamkda', key)
+		if key == "Black":
+			text = simpleTo(res[key]["text"])
+			output[key]['text'] = text
+		else:
+			text = simpleTo(res[key]["text"])
+			square = simpleTos(res[key]["square"])
+			output[key]['text'] = text
+			output[key]['square'] = square
+	print("end!!!!")
+	return output
+			
+def simpleTo(binary):
+	to_datas = []
+	to_datas.append({"data": binary.decode('utf-8'), "format": "png", "name": "simple"})
+	res = postOCR(to_datas)
+	return res.json()
+def simpleTos(binarys):
+	to_datas = []
+	for item in binarys:
+		to_datas.append({"data": item.decode('utf-8'), "format": "png", "name": "simple"})
+	res = postOCR(to_datas)
+	return res.json()
 def simpleOCR(url):
 	#とりあえず、一枚の画像をOCRに投げるために
 	#print(file)

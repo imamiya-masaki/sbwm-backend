@@ -29,7 +29,7 @@ def load():
     print("take:Data", request.json)
     img = request.json["img_file"]
     output['status'] = "200"
-    output['data'] = simpleOCR(img)
+    output['data'] = simple2OCR(img)
     data = request
     #print('args', request,data.values.get('img_file'), request.json["img_file"])
     #return json.dumps({'status': "200"})
