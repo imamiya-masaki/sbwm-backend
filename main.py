@@ -14,7 +14,7 @@ def load():
     if request.method ==  'POST':
         print('request', request)
         if 'img_file' not in request.form:
-            output['status'] = 400
+            output['status'] = "400"
             output['error'] = 'img_file not in request'
  #       elif not allowed_file(request.form['img_file']):
 #         output['status'] = 400
@@ -25,5 +25,5 @@ def load():
             #filename = secure_filename(img_file.filename)
             img = base64.b64decode(request.form['img_file'])
             print('args', request, img)
-            return simpleOCR(img)
+            return  {'status': "200", 'data': simpleOCR(img)}
 
