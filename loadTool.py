@@ -12,7 +12,7 @@ def allowed_file(file):
         filename.rsplit(".", 1)[1] in ALLOWED_EXTENSIONS
 
 def helloWorld():
-    return "Hello Wrold"
+    return "Hello Wrold2"
 
 def simpleOCR(file):
     #とりあえず、一枚の画像をOCRに投げるために
