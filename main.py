@@ -26,9 +26,12 @@ def load():
       #success
       #img_file = request.form['img_file']
       #filename = secure_filename(img_file.filename)
-    img = base64.b64decode(request.form['img_file'])
+    
+    img = request.json["img_file"]
     output['status'] = "200"
     output['data'] = simpleOCR(img)
-    #print('args', request, img)
-    return  json.dumps({'status': "200", 'data': simpleOCR(img)})
+    data = request
+    #print('args', request,data.values.get('img_file'), request.json["img_file"])
+    #return json.dumps({'status': "200"})
+    return  json.dumps(output)
    
