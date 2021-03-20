@@ -1,6 +1,7 @@
 from flask import *
 from loadTool import *
 from werkzeug.utils import secure_filename
+import base64
 app = Flask(__name__)
 
 @app.route('/')
@@ -15,13 +16,14 @@ def load():
         if 'img_file' not in request.form:
             output['status'] = 400
             output['error'] = 'img_file not in request'
-        elif not allowed_file(request.form['img_file']):
-            output['status'] = 400
-            output['error'] = 'can use extension type'
+ #       elif not allowed_file(request.form['img_file']):
+#         output['status'] = 400
+ #           output['error'] = 'can use extension type'
         else:
             #success
-            img_file = request.form['img_file']
-            filename = secure_filename(img_file.filename)
-            print('args', request, img_file)
-            return simpleOCR(img_file)
+            #img_file = request.form['img_file']
+            #filename = secure_filename(img_file.filename)
+            img = base64.b64decode(request.form['img_file'])
+            print('args', request, img)
+            return simpleOCR(img)
 
