@@ -33,4 +33,5 @@ def load():
 #       output['data'] = simpleOCR(img)
 #       #print('args', request, img)
 #     return  json.dumps({'status': "200", 'data': simpleOCR(img)})
+  return "return World" 
    
