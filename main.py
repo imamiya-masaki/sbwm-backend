@@ -26,7 +26,7 @@ def load():
       #success
       #img_file = request.form['img_file']
       #filename = secure_filename(img_file.filename)
-    
+    print("take:Data", request.json)
     img = request.json["img_file"]
     output['status'] = "200"
     output['data'] = simpleOCR(img)
