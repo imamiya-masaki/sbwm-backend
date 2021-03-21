@@ -32,8 +32,8 @@ def simple2OCR(url):
 		output[key]['square'] = []
 		text = simpleTo(res[key]["text"])
 		#output[key]['text'] = text
-		print("item", text["images"])
 		if "images" in text:
+			print("item", text["images"])
 			for image in text["images"]:
 				if "fields" in image:
 					for item in image["fields"]:
