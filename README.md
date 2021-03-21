@@ -17,7 +17,7 @@ GET
 output:
 
 ```
-"hello world"
+"hello world2"
 ```
 
 -----
