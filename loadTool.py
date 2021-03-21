@@ -27,13 +27,13 @@ def simple2OCR(url):
 	res = imageRe(file)
 	output = {'red': {}, 'blue': {}, 'green': {}, 'Black': {}}
 	for key in res:
-		print('kmdkwamkda', key)
+		#print('kmdkwamkda', key)
 		output[key]['text'] = []
 		output[key]['square'] = []
 		text = simpleTo(res[key]["text"])
 		#output[key]['text'] = text
 		if "images" in text:
-			print("item", text["images"])
+			#print("item", text["images"])
 			for image in text["images"]:
 				if "fields" in image:
 					for item in image["fields"]:
