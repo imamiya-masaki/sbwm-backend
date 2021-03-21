@@ -28,14 +28,26 @@ def simple2OCR(url):
 	output = {'red': {}, 'blue': {}, 'green': {}, 'Black': {}}
 	for key in res:
 		print('kmdkwamkda', key)
-		if key == "Black":
-			text = simpleTo(res[key]["text"])
-			output[key]['text'] = text
-		else:
-			text = simpleTo(res[key]["text"])
+		output[key]['text'] = []
+		output[key]['square'] = []
+		text = simpleTo(res[key]["text"])
+		#output[key]['text'] = text
+		print("item", text["images"])
+		if "images" in text:
+			for image in text["images"]:
+				if "fields" in image:
+					for item in image["fields"]:
+						if "inferText" in item:
+							output[key]['text'].append(item["inferText"])
+		if not key == "Black":
 			square = simpleTos(res[key]["square"])
-			output[key]['text'] = text
-			output[key]['square'] = square
+			if "images" in square:
+				for image in square["images"]:
+					if "fields" in image:
+						for item in image["fields"]:
+							if "inferText" in item:
+								output[key]['square'].append(item["inferText"])
+			#output[key]['square'] = square
 	print("end!!!!")
 	return output
 			
