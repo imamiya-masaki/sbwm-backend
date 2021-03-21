@@ -115,7 +115,8 @@ def imageRe (byte):
         img_th = cv2.dilate(img_th,neiborhood,iterations=7)
         #img_th = cv2.ximgproc.thinning(img_th,thinningType = cv2.ximgproc.THINNING_GUOHALL)
         #img_th = cv2.dilate(img_th,neiborhood,iterations=1)
-
+        if(num == 0):
+            img_th_Bl = img_th
         # Step 2 ----------------------------------------------------------------------------------------------
         contours = cv2.findContours(img_th, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
 
@@ -151,6 +152,7 @@ def imageRe (byte):
             rects.append(rect)
             outputs.append(getPartImageByRect(rect, img_c))
             img_th = cv2.rectangle(img_th,(rect[2]-100,rect[1]+100),(rect[3]+100,rect[0]-100),(0,0,0),-1)
+            img_th_Bl = cv2.rectangle(img_th_Bl,(rect[2],rect[1]),(rect[3],rect[0]),(0,0,0),-1)
             if((abs(beforeRect[0]-rect[0])<200)and(abs(beforeRect[1]-rect[1])<200)and(abs(beforeRect[2]-rect[2])<200)and(abs(beforeRect[3]-rect[3])<200)):
                 continue
 
@@ -180,12 +182,12 @@ def imageRe (byte):
             print(rect)
         print(str(color), "color")
         cv2.imwrite('./output/'+str(color)+'output.png',img_th)
-        if(num == 0):
-            target_file = r"./output/Bloutput.png"
-            with open(target_file, 'rb') as f:
-                data = f.read()
-            binaryBl = base64.b64encode(data)
-            Blackdict = {"text":binaryBl}
+        # if(num == 0):
+        #     target_file = r"./output/Bloutput.png"
+        #     with open(target_file, 'rb') as f:
+        #         data = f.read()
+        #     binaryBl = base64.b64encode(data)
+        #     Blackdict = {"text":binaryBl}
         
         if(num == 1):
             target_file = r"./output/Routput.png"
@@ -218,6 +220,12 @@ def imageRe (byte):
     with open(encode_file,"wb") as f:
         f.write(binaryB)
     """
+    cv2.imwrite('./output/Bloutput.png',img_th_Bl)
+    target_file = r"./output/Bloutput.png"
+    with open(target_file, 'rb') as f:
+        data = f.read()
+    binaryBl = base64.b64encode(data)
+    Blackdict = {"text":binaryBl}
     imgdict = {"Black":Blackdict,"red":reddict, "green":greendict, "blue":bluedict}
     return imgdict
 #print(imgdict)
