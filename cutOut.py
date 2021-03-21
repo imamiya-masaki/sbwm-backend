@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import base64
 from PIL import Image
 import io
-
+import os
 print('start')
 #[[User specified parameters]]
 
@@ -140,7 +140,7 @@ def imageRe (byte):
         outputs = []
         rects = []
         approxes = []
-
+        write_paths = []
         for (i,cnt) in enumerate(contours_large):
             arclen = cv2.arcLength(cnt, True)
             approx = cv2.approxPolyDP(cnt, 0.02*arclen, True)
@@ -159,6 +159,7 @@ def imageRe (byte):
             img_output = getPartImageByRect(rect, img_c)
             img_name = './output/'+str(color)+str(i)+'.png'
             cv2.imwrite(img_name,img_output)
+            write_paths.append(img_name)
             print(str(color), "color")
             target_file = r""+str(img_name)+""
             if(num == 1):
@@ -182,6 +183,7 @@ def imageRe (byte):
             print(rect)
         print(str(color), "color")
         cv2.imwrite('./output/'+str(color)+'output.png',img_th)
+        write_paths.append('./output/'+str(color)+'output.png')
         # if(num == 0):
         #     target_file = r"./output/Bloutput.png"
         #     with open(target_file, 'rb') as f:
@@ -221,12 +223,19 @@ def imageRe (byte):
         f.write(binaryB)
     """
     cv2.imwrite('./output/Bloutput.png',img_th_Bl)
+    write_paths.append('./output/Bloutput.png')
+    write_paths.append('./output/Goutput.png')
+    write_paths.append('./output/Routput.png')
     target_file = r"./output/Bloutput.png"
     with open(target_file, 'rb') as f:
         data = f.read()
     binaryBl = base64.b64encode(data)
     Blackdict = {"text":binaryBl}
     imgdict = {"Black":Blackdict,"red":reddict, "green":greendict, "blue":bluedict}
+    for key in write_paths:
+        if os.path.exists(key):
+            os.remove(key)
+    
     return imgdict
 #print(imgdict)
 
